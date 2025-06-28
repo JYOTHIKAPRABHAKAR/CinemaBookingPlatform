@@ -1,6 +1,6 @@
 # Cinema Booking Platform - Backend Assignment
 
-A full-stack backend API for a cinema booking platform similar to PVR Cinemas. The system includes modules for user accounts, movie listings, theater and screen management, seat selection, real-time show bookings, food orders, and integrated payments.
+A backend API for a cinema booking platform similar to PVR Cinemas. The system includes modules for user accounts, movie listings, theater and screen management, seat selection, real-time show bookings, food orders, and integrated payments.
 
 ## 🎬 Overview
 
