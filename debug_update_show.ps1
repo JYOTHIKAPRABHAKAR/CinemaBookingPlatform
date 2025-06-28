@@ -20,8 +20,8 @@ try {
 # Step 2: Test update show with detailed error handling
 Write-Host "`n2. Testing Update Show..." -ForegroundColor Cyan
 $updateShowData = @{
-    show_time = "16:00"
-    base_price = 350
+    showTime = "16:00"
+    basePrice = 350
 } | ConvertTo-Json
 
 try {

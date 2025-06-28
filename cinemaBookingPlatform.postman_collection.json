@@ -515,9 +515,9 @@
               "raw": "{\n  \"basePrice\": 450,\n  \"showTime\": \"19:00\"\n}"
             },
             "url": {
-              "raw": "{{baseUrl}}/api/admin/shows/{{showId}}",
+              "raw": "{{baseUrl}}/api/shows/{{showId}}",
               "host": ["{{baseUrl}}"],
-              "path": ["api", "admin", "shows", "{{showId}}"]
+              "path": ["api", "shows", "{{showId}}"]
             }
           }
         },

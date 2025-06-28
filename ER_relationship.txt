@@ -1,1 +1,142 @@
- 
+# Cinema Booking Platform - Entity Relationship Diagram
+
+## Database Schema Overview
+
+### Core Entities and Their Relationships
+
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│     CITIES      │    │    THEATERS     │    │     SCREENS     │
+├─────────────────┤    ├─────────────────┤    ├─────────────────┤
+│ id (PK)         │    │ id (PK)         │    │ id (PK)         │
+│ name            │◄───┤ name            │◄───┤ name            │
+│ state           │    │ address         │    │ type            │
+└─────────────────┘    │ city_id (FK)    │    │ capacity        │
+                       │ facilities      │    │ sound_system    │
+                       │ latitude        │    │ theater_id (FK) │
+                       │ longitude       │    └─────────────────┘
+                       └─────────────────┘              │
+                                                        │
+                                                        ▼
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│     MOVIES      │    │      SHOWS      │    │  SEAT_LAYOUTS   │
+├─────────────────┤    ├─────────────────┤    ├─────────────────┤
+│ id (PK)         │    │ id (PK)         │    │ id (PK)         │
+│ title           │◄───┤ movie_id (FK)   │    │ screen_id (FK)  │
+│ description     │    │ screen_id (FK)  │◄───┤ layout_data     │
+│ duration_mins   │    │ theater_id (FK) │    └─────────────────┘
+│ genre           │    │ show_date       │
+│ language        │    │ show_time       │    ┌─────────────────┐
+│ format          │    │ base_price      │    │   SEAT_LAYOUT   │
+│ release_date    │    │ format          │    ├─────────────────┤
+│ rating          │    │ language        │    │ id (PK)         │
+│ cast            │    │ status          │    │ screen_id (FK)  │
+│ director        │    └─────────────────┘    │ category        │
+│ producer        │              │            │ row             │
+│ poster_url      │              │            │ seat_number     │
+│ trailer_url     │              │            │ is_blocked      │
+│ imdb_rating     │              │            └─────────────────┘
+│ is_upcoming     │              │
+└─────────────────┘              │
+                                 │
+                                 ▼
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│     USERS       │    │    BOOKINGS     │    │  BOOKED_SEATS   │
+├─────────────────┤    ├─────────────────┤    ├─────────────────┤
+│ id (PK)         │    │ id (PK)         │    │ id (PK)         │
+│ name            │◄───┤ user_id (FK)    │◄───┤ user_id (FK)    │
+│ email           │    │ show_id (FK)    │    │ show_id (FK)    │
+│ password        │    │ booking_ref     │    │ seat_label      │
+│ mobile          │    │ total_amount    │    │ seat_category   │
+│ date_of_birth   │    │ booking_status  │    │ status          │
+│ is_admin        │    │ payment_status  │    │ held_until      │
+└─────────────────┘    │ booked_at       │    │ booking_id (FK) │
+                       │ user_email      │    └─────────────────┘
+                       │ user_mobile     │
+                       └─────────────────┘
+                                 │
+                                 ▼
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│    PAYMENTS     │    │     SNACKS      │    │  FOOD_ORDERS    │
+├─────────────────┤    ├─────────────────┤    ├─────────────────┤
+│ id (PK)         │    │ id (PK)         │    │ id (PK)         │
+│ booking_id (FK) │◄───┤ name            │◄───┤ booking_id (FK) │
+│ transaction_id  │    │ description     │    │ snack_id (FK)   │
+│ amount          │    │ category        │    │ quantity        │
+│ method          │    │ price           │    │ price_at_order  │
+│ status          │    │ size            │    │ ordered_at      │
+│ payment_date    │    │ is_veg          │    └─────────────────┘
+│ breakdown       │    └─────────────────┘
+└─────────────────┘
+
+┌─────────────────┐
+│  SEAT_PRICING   │
+├─────────────────┤
+│ id (PK)         │
+│ show_id (FK)    │
+│ category        │
+│ price           │
+└─────────────────┘
+```
+
+## Relationship Details
+
+### One-to-Many Relationships:
+1. **CITIES → THEATERS**: One city can have multiple theaters
+2. **THEATERS → SCREENS**: One theater can have multiple screens
+3. **MOVIES → SHOWS**: One movie can have multiple shows
+4. **SCREENS → SHOWS**: One screen can have multiple shows
+5. **USERS → BOOKINGS**: One user can have multiple bookings
+6. **SHOWS → BOOKINGS**: One show can have multiple bookings
+7. **BOOKINGS → BOOKED_SEATS**: One booking can have multiple seats
+8. **BOOKINGS → PAYMENTS**: One booking can have one payment
+9. **BOOKINGS → FOOD_ORDERS**: One booking can have multiple food orders
+10. **SCREENS → SEAT_LAYOUTS**: One screen has one seat layout
+11. **SCREENS → SEAT_LAYOUT**: One screen can have multiple seat entries
+12. **SHOWS → SEAT_PRICING**: One show can have multiple seat pricing categories
+
+### Foreign Key Relationships:
+- `theaters.city_id` → `cities.id`
+- `screens.theater_id` → `theaters.id`
+- `shows.movie_id` → `movies.id`
+- `shows.screen_id` → `screens.id`
+- `shows.theater_id` → `theaters.id`
+- `bookings.user_id` → `users.id`
+- `bookings.show_id` → `shows.id`
+- `booked_seats.user_id` → `users.id`
+- `booked_seats.show_id` → `shows.id`
+- `booked_seats.booking_id` → `bookings.id`
+- `payments.booking_id` → `bookings.id`
+- `food_orders.booking_id` → `bookings.id`
+- `food_orders.snack_id` → `snacks.id`
+- `seat_layouts.screen_id` → `screens.id`
+- `seat_layout.screen_id` → `screens.id`
+- `seat_pricing.show_id` → `shows.id`
+
+## Business Logic Relationships:
+
+### Booking Flow:
+1. **User** selects a **Movie** and **Show**
+2. **Show** is associated with a **Screen** and **Theater**
+3. **User** selects **Seats** from **Seat_Layout**
+4. **Booking** is created with **Booked_Seats**
+5. **Payment** is processed for the **Booking**
+6. **Food_Orders** can be added to the **Booking**
+
+### Pricing Structure:
+- **Shows** have a **base_price**
+- **Seat_Pricing** defines different prices for different seat categories
+- **Food_Orders** have their own pricing
+
+### Location Hierarchy:
+- **Cities** contain **Theaters**
+- **Theaters** contain **Screens**
+- **Screens** host **Shows**
+
+## Key Constraints:
+- **Unique booking references** per booking
+- **Unique transaction IDs** per payment
+- **Unique seat combinations** per show (show_id + seat_label)
+- **Unique email and mobile** per user
+- **Unique theater names** per city
+- **Unique screen names** per theater 

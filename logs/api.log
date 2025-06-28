@@ -8396,3 +8396,274 @@ Meta: {
   "port": "3000",
   "environment": "development"
 }
+2025-06-28 09:50:23 [INFO]: Server started successfully
+Meta: {
+  "service": "cinema-booking-api",
+  "version": "1.0.0",
+  "port": "3000",
+  "environment": "development"
+}
+2025-06-28 10:29:57 [INFO]: API Request
+Meta: {
+  "service": "cinema-booking-api",
+  "version": "1.0.0",
+  "method": "POST",
+  "url": "/api/auth/login",
+  "ip": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; en-IN) WindowsPowerShell/5.1.26100.4202",
+  "body": {
+    "password": "adminpassword",
+    "email": "admin@example.com"
+  },
+  "query": {},
+  "params": {}
+}
+2025-06-28 10:29:57 [INFO]: Login attempt
+Meta: {
+  "service": "cinema-booking-api",
+  "version": "1.0.0",
+  "email": "admin@example.com"
+}
+2025-06-28 10:29:57 [INFO]: Authentication Success
+Meta: {
+  "service": "cinema-booking-api",
+  "version": "1.0.0",
+  "userId": 1,
+  "email": "admin@example.com",
+  "event": "login"
+}
+2025-06-28 10:29:57 [INFO]: API Response
+Meta: {
+  "service": "cinema-booking-api",
+  "version": "1.0.0",
+  "method": "POST",
+  "url": "/api/auth/login",
+  "statusCode": 200,
+  "responseTime": "166ms"
+}
+2025-06-28 10:29:57 [INFO]: API Request
+Meta: {
+  "service": "cinema-booking-api",
+  "version": "1.0.0",
+  "method": "PUT",
+  "url": "/api/shows/1",
+  "ip": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; en-IN) WindowsPowerShell/5.1.26100.4202",
+  "body": {
+    "show_time": "16:00",
+    "base_price": 350
+  },
+  "query": {},
+  "params": {}
+}
+2025-06-28 10:29:57 [WARN]: API Response
+Meta: {
+  "service": "cinema-booking-api",
+  "version": "1.0.0",
+  "method": "PUT",
+  "url": "/api/shows/1",
+  "statusCode": 400,
+  "responseTime": "17ms",
+  "userId": 1
+}
+2025-06-28 10:29:57 [INFO]: API Request
+Meta: {
+  "service": "cinema-booking-api",
+  "version": "1.0.0",
+  "method": "PUT",
+  "url": "/api/shows/11",
+  "ip": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; en-IN) WindowsPowerShell/5.1.26100.4202",
+  "body": {
+    "show_time": "16:00",
+    "base_price": 350
+  },
+  "query": {},
+  "params": {}
+}
+2025-06-28 10:29:57 [WARN]: API Response
+Meta: {
+  "service": "cinema-booking-api",
+  "version": "1.0.0",
+  "method": "PUT",
+  "url": "/api/shows/11",
+  "statusCode": 400,
+  "responseTime": "9ms",
+  "userId": 1
+}
+2025-06-28 10:30:04 [INFO]: API Request
+Meta: {
+  "service": "cinema-booking-api",
+  "version": "1.0.0",
+  "method": "POST",
+  "url": "/api/auth/login",
+  "ip": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; en-IN) WindowsPowerShell/5.1.26100.4202",
+  "body": {
+    "password": "adminpassword",
+    "email": "admin@example.com"
+  },
+  "query": {},
+  "params": {}
+}
+2025-06-28 10:30:04 [INFO]: Login attempt
+Meta: {
+  "service": "cinema-booking-api",
+  "version": "1.0.0",
+  "email": "admin@example.com"
+}
+2025-06-28 10:30:04 [INFO]: Authentication Success
+Meta: {
+  "service": "cinema-booking-api",
+  "version": "1.0.0",
+  "userId": 1,
+  "email": "admin@example.com",
+  "event": "login"
+}
+2025-06-28 10:30:04 [INFO]: API Response
+Meta: {
+  "service": "cinema-booking-api",
+  "version": "1.0.0",
+  "method": "POST",
+  "url": "/api/auth/login",
+  "statusCode": 200,
+  "responseTime": "83ms"
+}
+2025-06-28 10:30:04 [INFO]: API Request
+Meta: {
+  "service": "cinema-booking-api",
+  "version": "1.0.0",
+  "method": "PUT",
+  "url": "/api/shows/1",
+  "ip": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; en-IN) WindowsPowerShell/5.1.26100.4202",
+  "body": {
+    "show_time": "16:00",
+    "base_price": 350
+  },
+  "query": {},
+  "params": {}
+}
+2025-06-28 10:30:04 [WARN]: API Response
+Meta: {
+  "service": "cinema-booking-api",
+  "version": "1.0.0",
+  "method": "PUT",
+  "url": "/api/shows/1",
+  "statusCode": 400,
+  "responseTime": "4ms",
+  "userId": 1
+}
+2025-06-28 10:30:04 [INFO]: API Request
+Meta: {
+  "service": "cinema-booking-api",
+  "version": "1.0.0",
+  "method": "PUT",
+  "url": "/api/shows/11",
+  "ip": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; en-IN) WindowsPowerShell/5.1.26100.4202",
+  "body": {
+    "show_time": "16:00",
+    "base_price": 350
+  },
+  "query": {},
+  "params": {}
+}
+2025-06-28 10:30:04 [WARN]: API Response
+Meta: {
+  "service": "cinema-booking-api",
+  "version": "1.0.0",
+  "method": "PUT",
+  "url": "/api/shows/11",
+  "statusCode": 400,
+  "responseTime": "4ms",
+  "userId": 1
+}
+2025-06-28 10:30:36 [INFO]: API Request
+Meta: {
+  "service": "cinema-booking-api",
+  "version": "1.0.0",
+  "method": "POST",
+  "url": "/api/auth/login",
+  "ip": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; en-IN) WindowsPowerShell/5.1.26100.4202",
+  "body": {
+    "password": "adminpassword",
+    "email": "admin@example.com"
+  },
+  "query": {},
+  "params": {}
+}
+2025-06-28 10:30:36 [INFO]: Login attempt
+Meta: {
+  "service": "cinema-booking-api",
+  "version": "1.0.0",
+  "email": "admin@example.com"
+}
+2025-06-28 10:30:36 [INFO]: Authentication Success
+Meta: {
+  "service": "cinema-booking-api",
+  "version": "1.0.0",
+  "userId": 1,
+  "email": "admin@example.com",
+  "event": "login"
+}
+2025-06-28 10:30:36 [INFO]: API Response
+Meta: {
+  "service": "cinema-booking-api",
+  "version": "1.0.0",
+  "method": "POST",
+  "url": "/api/auth/login",
+  "statusCode": 200,
+  "responseTime": "84ms"
+}
+2025-06-28 10:30:36 [INFO]: API Request
+Meta: {
+  "service": "cinema-booking-api",
+  "version": "1.0.0",
+  "method": "PUT",
+  "url": "/api/shows/1",
+  "ip": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; en-IN) WindowsPowerShell/5.1.26100.4202",
+  "body": {
+    "basePrice": 350,
+    "showTime": "16:00"
+  },
+  "query": {},
+  "params": {}
+}
+2025-06-28 10:30:36 [INFO]: API Response
+Meta: {
+  "service": "cinema-booking-api",
+  "version": "1.0.0",
+  "method": "PUT",
+  "url": "/api/shows/1",
+  "statusCode": 200,
+  "responseTime": "51ms",
+  "userId": 1
+}
+2025-06-28 10:30:36 [INFO]: API Request
+Meta: {
+  "service": "cinema-booking-api",
+  "version": "1.0.0",
+  "method": "PUT",
+  "url": "/api/shows/11",
+  "ip": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; en-IN) WindowsPowerShell/5.1.26100.4202",
+  "body": {
+    "basePrice": 350,
+    "showTime": "16:00"
+  },
+  "query": {},
+  "params": {}
+}
+2025-06-28 10:30:36 [WARN]: API Response
+Meta: {
+  "service": "cinema-booking-api",
+  "version": "1.0.0",
+  "method": "PUT",
+  "url": "/api/shows/11",
+  "statusCode": 404,
+  "responseTime": "3ms",
+  "userId": 1
+}
