@@ -1,136 +1,274 @@
-# Cinema Booking Platform API
+# Cinema Booking Platform - Backend Assignment
 
-A comprehensive Node.js/Express API for a cinema booking platform with JWT authentication, movie management, show scheduling, seat booking, and payment processing.
+A full-stack backend API for a cinema booking platform similar to PVR Cinemas. The system includes modules for user accounts, movie listings, theater and screen management, seat selection, real-time show bookings, food orders, and integrated payments.
 
-## Features
+## 🎬 Overview
 
-- **Authentication**: JWT-based user and admin authentication
-- **Movie Management**: CRUD operations for movies (admin only)
-- **Show Management**: Create, update, delete shows (admin only)
-- **Seat Booking**: Real-time seat availability and booking
-- **Payment Processing**: Integrated payment gateway
-- **Food & Beverage**: FnB ordering system
-- **Admin Dashboard**: Revenue reports and booking management
+This is a comprehensive Node.js/Express.js backend API that powers a cinema booking platform with enterprise-grade features including JWT authentication, real-time seat booking, payment processing, and admin management capabilities. The system is designed to handle the complete booking lifecycle from movie discovery to payment confirmation.
 
-## Fixed Issues
+## 🛠️ Tech Stack
 
-✅ **Movie Management**: Added create, update, delete functionality  
-✅ **Show Management**: Implemented create, update, delete operations  
-✅ **JWT Authentication**: Proper token generation and validation  
-✅ **Admin Authorization**: Role-based access control  
-✅ **Postman Collection**: Updated with automatic token handling  
+- **Runtime**: Node.js + Express.js
+- **Database**: SQLite (development)
+- **Authentication**: JWT (JSON Web Tokens)
+- **Password Hashing**: bcrypt
+- **Validation**: Joi + Express-validator
+- **Logging**: Winston (structured logging)
+- **Rate Limiting**: Express-rate-limit
+- **CORS**: Cross-origin resource sharing enabled
 
-## Quick Start
+## ✨ Key Features
+
+### 🔐 Authentication & Authorization
+- Secure user registration and login
+- JWT-based authentication with token expiration
+- Role-based access control (User/Admin)
+- Password hashing with bcrypt
+- Rate limiting on authentication endpoints
+
+### 🎥 Movie Management
+- Comprehensive movie CRUD operations
+- Filtering by city, genre, language, and format
+- Support for upcoming movies
+- Movie metadata (cast, director, ratings, etc.)
+- Multiple format support (2D, 3D, IMAX)
+
+### 🎭 Show & Theater Management
+- Dynamic show scheduling
+- Theater and screen management
+- Real-time seat availability
+- Seat layout management with categories (Regular, Premium, Recliner)
+- Show status tracking (active, cancelled, housefull)
+
+### 🪑 Seat Booking System
+- Real-time seat selection and booking
+- Conflict prevention for concurrent bookings
+- Seat hold functionality
+- Dynamic seat pricing by category
+- Seat layout visualization
+
+### 🍿 Food & Beverage
+- Comprehensive F&B menu management
+- Category-based menu organization
+- Order integration with bookings
+- Pricing and availability tracking
+
+### 💳 Payment Processing
+- Payment initiation and confirmation
+- Multiple payment method support
+- Transaction tracking
+- Integration with booking system
+
+### 📊 Admin Dashboard
+- Revenue reporting
+- Booking management
+- Show scheduling
+- User management
+- System analytics
+
+## 🚀 Quick Start
 
 ### Prerequisites
 
-- Node.js (v14 or higher)
-- SQLite3
-- npm or yarn
+- **Node.js** (v14 or higher)
+- **npm** or **yarn**
+- **SQLite3** (included with Node.js)
 
 ### Installation
 
-1. Clone the repository:
-```bash
-git clone <repository-url>
-cd cinemaBookingPlatform
-```
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd cinemaBookingPlatform
+   ```
 
-2. Install dependencies:
-```bash
-npm install
-```
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-3. Set up environment variables:
-```bash
-# Create .env file
-JWT_SECRET=your_jwt_secret_key_here
-PORT=3000
-```
+3. **Set up environment variables**
+   ```bash
+   # Create .env file in the root directory
+   JWT_SECRET=your_super_secret_jwt_key_here
+   PORT=3000
+   NODE_ENV=development
+   ```
 
-4. Initialize the database:
-```bash
-npm run setup
-```
+4. **Initialize the database**
+   ```bash
+   npm run init-db
+   ```
 
-5. Start the server:
-```bash
-npm start
-```
+5. **Start the server**
+   ```bash
+   npm start
+   ```
 
 The API will be available at `http://localhost:3000`
 
-## API Endpoints
+### Development Mode
 
-### Authentication
+```bash
+npm run dev
+```
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/auth/register` | Register a new user |
-| POST | `/api/auth/login` | Login user/admin |
+## 📁 Project Structure
 
-### Movies
+```
+cinemaBookingPlatform/
+├── src/
+│   ├── config/
+│   │   └── database.js          # Database configuration
+│   ├── controllers/
+│   │   ├── adminController.js   # Admin operations
+│   │   ├── authController.js    # Authentication
+│   │   ├── bookingController.js # Booking management
+│   │   ├── movieController.js   # Movie operations
+│   │   ├── showController.js    # Show management
+│   │   └── ...                  # Other controllers
+│   ├── middleware/
+│   │   ├── auth.js              # JWT authentication
+│   │   ├── validation.js        # Input validation
+│   │   └── errorHandler.js      # Error handling
+│   ├── routes/
+│   │   ├── authRoutes.js        # Auth endpoints
+│   │   ├── movieRoutes.js       # Movie endpoints
+│   │   ├── bookingRoutes.js     # Booking endpoints
+│   │   └── ...                  # Other routes
+│   ├── utils/
+│   │   ├── logger.js            # Winston logging
+│   │   ├── helpers.js           # Utility functions
+│   │   └── ...                  # Other utilities
+│   └── app.js                   # Main application file
+├── database/
+│   ├── cinema.db                # SQLite database
+│   ├── schema.sql               # Database schema
+│   └── seeds.sql                # Sample data
+├── logs/                        # Application logs
+├── package.json
+└── README.md
+```
+
+## 🗄️ Database Design
+
+### Entity Relationships
+
+```
+Users (1) ←→ (N) Bookings
+Movies (1) ←→ (N) Shows
+Theaters (1) ←→ (N) Screens
+Screens (1) ←→ (N) Shows
+Shows (1) ←→ (N) Bookings
+Bookings (1) ←→ (N) Booked_Seats
+Bookings (1) ←→ (N) Payments
+Bookings (1) ←→ (N) Food_Orders
+```
+
+### Core Tables
+
+- **users**: User accounts and authentication
+- **movies**: Movie information and metadata
+- **theaters**: Theater locations and facilities
+- **screens**: Individual screens within theaters
+- **shows**: Show scheduling and pricing
+- **bookings**: Booking records and status
+- **booked_seats**: Individual seat bookings
+- **payments**: Payment transaction records
+- **food_orders**: F&B order management
+- **seat_layouts**: Dynamic seat configurations
+
+## 📚 API Documentation
+
+### Base URL
+```
+http://localhost:3000/api
+```
+
+### Authentication Endpoints
 
 | Method | Endpoint | Description | Auth Required |
 |--------|----------|-------------|---------------|
-| GET | `/api/movies` | Get movies with filters | No |
-| GET | `/api/movies/:id` | Get movie details | No |
-| GET | `/api/movies/upcoming` | Get upcoming movies | No |
-| POST | `/api/movies` | Create new movie | Admin |
-| PUT | `/api/movies/:id` | Update movie | Admin |
-| DELETE | `/api/movies/:id` | Delete movie | Admin |
+| POST | `/auth/register` | Register new user | No |
+| POST | `/auth/login` | User/Admin login | No |
 
-### Shows
+### Movie Endpoints
 
 | Method | Endpoint | Description | Auth Required |
 |--------|----------|-------------|---------------|
-| GET | `/api/shows` | Get shows with filters | No |
-| GET | `/api/shows/:showId` | Get show details | No |
-| GET | `/api/shows/movie/:movieId` | Get shows by movie | No |
-| POST | `/api/shows` | Create new show | Admin |
-| PUT | `/api/shows/:showId` | Update show | Admin |
-| DELETE | `/api/shows/:showId` | Delete show | Admin |
+| GET | `/movies` | Get movies with filters | No |
+| GET | `/movies/:id` | Get movie details | No |
+| GET | `/movies/upcoming` | Get upcoming movies | No |
+| POST | `/movies` | Create new movie | Admin |
+| PUT | `/movies/:id` | Update movie | Admin |
+| DELETE | `/movies/:id` | Delete movie | Admin |
 
-### Bookings
-
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---------------|
-| POST | `/api/bookings` | Create booking | User |
-| GET | `/api/bookings/:bookingId` | Get booking details | User |
-
-### Seats
+### Show Endpoints
 
 | Method | Endpoint | Description | Auth Required |
 |--------|----------|-------------|---------------|
-| GET | `/api/shows/:showId/seats` | Get seat layout | No |
-| POST | `/api/shows/:showId/seats/block` | Block seats | User |
+| GET | `/shows` | Get shows with filters | No |
+| GET | `/shows/:showId` | Get show details | No |
+| GET | `/shows/movie/:movieId` | Get shows by movie | No |
+| POST | `/shows` | Create new show | Admin |
+| PUT | `/shows/:showId` | Update show | Admin |
+| DELETE | `/shows/:showId` | Delete show | Admin |
 
-## Testing with Postman
+### Booking Endpoints
 
-### Import Collection
+| Method | Endpoint | Description | Auth Required |
+|--------|----------|-------------|---------------|
+| POST | `/bookings/create` | Create booking | User |
+| GET | `/bookings` | Get user bookings | User |
+| GET | `/bookings/:bookingId` | Get booking details | User |
 
-1. Import the `cinemaBookingPlatform.postman_collection.json` file into Postman
-2. Set up environment variables:
-   - `base_url`: `http://localhost:3000`
-   - `user_token`: (will be auto-populated after login)
-   - `admin_token`: (will be auto-populated after admin login)
+### Seat Endpoints
 
-### Testing Flow
+| Method | Endpoint | Description | Auth Required |
+|--------|----------|-------------|---------------|
+| GET | `/shows/:showId/seats` | Get seat layout | No |
+| POST | `/shows/:showId/seats/block` | Block seats | User |
 
-1. **Register/Login**: Start with user registration or login
-2. **Admin Login**: Login as admin for management operations
-3. **Create Movie**: Use admin token to create a new movie
-4. **Create Show**: Schedule shows for the movie
-5. **Test Booking**: Create bookings as a regular user
+### Payment Endpoints
 
-### Automatic Token Handling
+| Method | Endpoint | Description | Auth Required |
+|--------|----------|-------------|---------------|
+| POST | `/payments/initiate` | Initiate payment | User |
+| POST | `/payments/confirm` | Confirm payment | User |
 
-The Postman collection includes pre-request scripts that automatically:
-- Set the `Authorization` header with the appropriate token
-- Use `admin_token` for admin endpoints
-- Use `user_token` for user endpoints
+### F&B Endpoints
 
-## Example Requests
+| Method | Endpoint | Description | Auth Required |
+|--------|----------|-------------|---------------|
+| GET | `/fnb/menu` | Get F&B menu | No |
+| POST | `/fnb/order` | Place F&B order | User |
+
+## 📝 Example API Requests
+
+### User Registration
+```bash
+POST /api/auth/register
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "securePassword123",
+  "mobile": "+919876543210",
+  "dateOfBirth": "1990-01-01"
+}
+```
+
+### User Login
+```bash
+POST /api/auth/login
+Content-Type: application/json
+
+{
+  "email": "john@example.com",
+  "password": "securePassword123"
+}
+```
 
 ### Create Movie (Admin)
 ```bash
@@ -175,83 +313,137 @@ Content-Type: application/json
 }
 ```
 
-### Update Show (Admin)
+### Create Booking (User)
 ```bash
-PUT /api/shows/1
-Authorization: Bearer <admin_token>
+POST /api/bookings/create
+Authorization: Bearer <user_token>
 Content-Type: application/json
 
 {
-  "showTime": "15:00",
-  "basePrice": 300
+  "showId": 1,
+  "seats": ["A1", "A2"],
+  "userDetails": {
+    "email": "john@example.com",
+    "mobile": "+919876543210"
+  }
 }
 ```
 
-## Testing Script
+## 🧪 Testing
 
-Run the PowerShell test script to verify all endpoints:
+### Postman Collection
 
+1. Import `cinemaBookingPlatform.postman_collection.json` into Postman
+2. Set up environment variables:
+   - `base_url`: `http://localhost:3000`
+   - `user_token`: (auto-populated after login)
+   - `admin_token`: (auto-populated after admin login)
+
+### Automated Testing
+
+Run the PowerShell test script:
 ```powershell
 .\test_apis.ps1
 ```
 
-This script will:
-- Test user registration and login
-- Test admin login
-- Test movie creation, update, and retrieval
-- Test show creation, update, and retrieval
-- Provide detailed feedback on each endpoint
+### Manual Testing Flow
 
-## Database Schema
+1. **Register/Login**: Start with user registration or login
+2. **Admin Login**: Login as admin for management operations
+3. **Create Movie**: Use admin token to create a new movie
+4. **Create Show**: Schedule shows for the movie
+5. **Test Booking**: Create bookings as a regular user
 
-The application uses SQLite with the following main tables:
-- `users` - User accounts and authentication
-- `movies` - Movie information and metadata
-- `shows` - Show scheduling and pricing
-- `theaters` - Theater and screen information
-- `bookings` - Booking records and status
-- `booked_seats` - Individual seat bookings
-- `seat_pricing` - Dynamic pricing for different seat categories
+## 🌟 Bonus Features Implemented
 
-## Error Handling
+### 🪑 Advanced Seat Management
+- **Dynamic Seat Layouts**: Configurable seat arrangements per screen
+- **Seat Categories**: Regular, Premium, and Recliner seating
+- **Dynamic Pricing**: Different pricing for each seat category
+- **Seat Hold System**: Temporary seat reservation with timeout
+- **Conflict Prevention**: Real-time seat availability checking
 
-The API includes comprehensive error handling:
-- Input validation using Joi schemas
-- Database constraint validation
-- JWT token validation and expiration handling
-- Role-based access control
-- Centralized error responses
+### 💰 Dynamic Pricing
+- **Category-based Pricing**: Different prices for Regular, Premium, Recliner
+- **Show-specific Pricing**: Custom pricing per show
+- **Automatic Price Updates**: Bulk price updates for shows
 
-## Security Features
+### 🔒 Security Enhancements
+- **Rate Limiting**: Prevents API abuse
+- **Input Validation**: Comprehensive request validation
+- **SQL Injection Prevention**: Parameterized queries
+- **CORS Configuration**: Secure cross-origin requests
 
-- JWT token-based authentication
-- Password hashing with bcrypt
-- Role-based authorization (User/Admin)
-- Input validation and sanitization
-- Rate limiting on API endpoints
-- CORS configuration
+### 📊 Comprehensive Logging
+- **Structured Logging**: Winston-based logging system
+- **Multiple Log Files**: API, Error, Exception, and Combined logs
+- **Request Tracking**: Full request/response logging
+- **Performance Monitoring**: Response time tracking
 
-## Contributing
+## 🤔 Assumptions Made
+
+1. **Database**: SQLite for development (easily switchable to PostgreSQL/MySQL)
+2. **Authentication**: JWT tokens with configurable expiration
+3. **Seat Booking**: First-come-first-served with real-time conflict prevention
+4. **Payment**: Mock payment gateway (easily integrable with real gateways)
+5. **Time Zones**: UTC timestamps for consistency
+6. **File Storage**: URLs for movie posters and trailers
+7. **Rate Limiting**: Per-IP rate limiting on authentication endpoints
+
+## 🗃️ Database Seeding
+
+The application automatically seeds the database with sample data:
+
+### Sample Data Includes:
+- **5 Cities**: Mumbai, Delhi, Bangalore, Chennai, Hyderabad
+- **5 Theaters**: Major cinema chains across cities
+- **6 Screens**: Mix of IMAX, 2D, and 3D screens
+- **10 Movies**: Popular movies with metadata
+- **10 Shows**: Scheduled shows across theaters
+- **2 Users**: Admin and regular user accounts
+- **F&B Menu**: Complete food and beverage menu
+
+### Manual Seeding
+```bash
+npm run init-db
+```
+
+## 🚀 Deployment
+
+### Environment Variables
+```bash
+JWT_SECRET=your_production_jwt_secret
+PORT=3000
+NODE_ENV=production
+DB_PATH=/path/to/production/database.db
+```
+
+### Production Considerations
+- Use a production database (PostgreSQL/MySQL)
+- Set up proper logging and monitoring
+- Configure CORS for your frontend domain
+- Use environment-specific JWT secrets
+- Set up SSL/TLS certificates
+
+## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests for new functionality
-5. Submit a pull request
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## License
+## 📄 License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Backend Seat Pricing Behavior
+## 📞 Support
 
-- When an admin creates a new show, seat pricing is automatically inserted for **all seat categories** present in the seat layout for the screen.
-- If the seat layout is missing or invalid for the screen, show creation will fail with a clear error.
-- When updating a show's base price, all seat pricing rows for that show are updated for all categories.
-- This ensures bookings never fail due to missing seat pricing for any category.
+For support and questions:
+- Create an issue in the repository
+- Check the logs in the `logs/` directory
+- Review the API documentation above
 
-## (Optional) Reset/Demo Script
+---
 
-- If you want to reset the database and seed demo data for easy testing, use the provided script (see scripts/ or ask the maintainer).
-###
-Hii
+**Built with ❤️ using Node.js and Express.js**
