@@ -120,6 +120,10 @@ cinemaBookingPlatform/
 ├── src/
 │   ├── config/
 │   │   └── database.js          # Database configuration
+<<<<<<< HEAD
+=======
+│   ├── controllers/
+>>>>>>> 8ca227fe0d1c6d0b9be36c56606025bc98946c1e
 │   │   ├── adminController.js   # Admin operations
 │   │   ├── authController.js    # Authentication
 │   │   ├── bookingController.js # Booking management
@@ -416,9 +420,12 @@ PORT=3000
 NODE_ENV=production
 DB_PATH=/path/to/production/database.db
 ```
+<<<<<<< HEAD
 
 ### Production Considerations
 - Use a production database (MySQL)
 - Set up proper logging and monitoring
 - Use environment-specific JWT secrets
+=======
+>>>>>>> 8ca227fe0d1c6d0b9be36c56606025bc98946c1e
 
