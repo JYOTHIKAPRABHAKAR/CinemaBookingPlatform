@@ -427,5 +427,5 @@ DB_PATH=/path/to/production/database.db
 - Set up proper logging and monitoring
 - Use environment-specific JWT secrets
 =======
->>>>>>> 8ca227fe0d1c6d0b9be36c56606025bc98946c1e
+
 
